@@ -1,25 +1,27 @@
 # --- Build stage ---
-    FROM node:20-alpine AS builder
+    FROM node:20-bullseye AS builder
 
     WORKDIR /app
     
-    # Copy package files và cài dependencies
+    # Copy package.json và cài dependencies
     COPY package*.json ./
     RUN npm install
     
-    # Copy source code vào
+    # Copy toàn bộ source code vào
     COPY . .
     
-    # Build app
+    # Build ứng dụng (React scripts sẽ build ra /app/build)
     RUN npm run build
     
     # --- Serve stage ---
     FROM nginx:alpine
     
-    # Copy build folder từ builder stage
+    # Copy các file build từ builder vào thư mục public của NGINX
     COPY --from=builder /app/build /usr/share/nginx/html
     
+    # EXPOSE port
     EXPOSE 80
     
+    # Khởi động nginx
     CMD ["nginx", "-g", "daemon off;"]
     
