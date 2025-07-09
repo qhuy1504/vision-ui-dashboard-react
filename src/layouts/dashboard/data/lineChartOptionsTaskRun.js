@@ -1,0 +1,45 @@
+export const lineChartOptionsTaskRun = (taskRunStats) => {
+    const entries = Object.entries(taskRunStats)
+        .sort((a, b) => new Date(a[0]) - new Date(b[0]));
+
+    return {
+        chart: {
+            type: "line",
+            toolbar: { show: false },
+        },
+        title: {
+            text: "Tổng số Task run theo ngày",
+            align: "center",
+
+            style: {
+                fontSize: "16px",
+                color: "#ffffff",
+            },
+        },
+        xaxis: {
+            categories: entries.map(([date]) => date),
+            labels: {
+                style: {
+                    colors: "#fff",
+                },
+            },
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: "#fff",
+                },
+            },
+        },
+        tooltip: {
+            theme: "dark",
+        },
+        stroke: {
+            curve: "smooth",
+        },
+        grid: {
+            borderColor: "#444",
+        },
+    };
+};
+  

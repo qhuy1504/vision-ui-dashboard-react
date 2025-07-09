@@ -1,0 +1,125 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-content {
+    background: white;
+    width: 80%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: #888;
+}
+
+  
+  .task-list-item {
+    border-bottom: 1px solid #ddd;
+    padding: 16px 0;
+  }
+  
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .task-details {
+    flex: 1;
+    color: #333;
+  }
+  
+  .task-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .task-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .edit-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .task-log pre {
+    background-color: #f7f7f7;
+    padding: 8px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+  }
+  
+  .task-name-input input {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+
+  .task-name-input input::placeholder {
+    color: black !important;
+    opacity: 1; 
+  }
+
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  
+  
+  .task-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 100px;
+    justify-content: center; /* canh giữa theo chiều dọc */
+  }
+  .task-details pre {
+    max-height: 80px;        /* Giới hạn chiều cao */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;   /* Cho phép xuống dòng nhưng vẫn giữ định dạng */
+    word-break: break-word;  /* Ngắt từ dài */
+    position: relative;
+    font-size: 14px;
+  }
+  
+  .task-details strong {
+    font-size: 14px;
+  }
+  .task-details p {
+    font-size: 14px;
+  }
+  

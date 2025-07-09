@@ -1,53 +1,20 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-import React, { Component } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
-class BarChart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chartData: [],
-      chartOptions: {},
-    };
+const BarChart = ({ barChartData, barChartOptions }) => {
+  if (!barChartData || !Array.isArray(barChartData) || barChartData.length === 0) {
+    return <p>Đang tải biểu đồ hoặc không có dữ liệu</p>;
   }
-
-  componentDidMount() {
-    const { barChartData, barChartOptions } = this.props;
-
-    this.setState({
-      chartData: barChartData,
-      chartOptions: barChartOptions,
-    });
-  }
-
-  render() {
-    return (
-      <Chart
-        options={this.state.chartOptions}
-        series={this.state.chartData}
-        type="bar"
-        width="100%"
-        height="100%"
-      />
-    );
-  }
-}
+  
+  return (
+    <Chart
+      options={barChartOptions}
+      series={barChartData}
+      type="bar"
+      width="100%"
+      height="100%"
+    />
+  );
+};
 
 export default BarChart;

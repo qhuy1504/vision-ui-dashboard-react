@@ -25,6 +25,6 @@ export default styled(Box)(() => {
     width: "fit-content",
     height: "fit-content",
     backgroundImage:
-      "radial-gradient(69.43% 69.43% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)  ",
+      "radial-gradient(69.43% 69.43% at 50% 50%, #FFFFFF 0%, rgb(255, 255, 255) 100%)  ",
   };
 });

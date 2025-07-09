@@ -1,0 +1,81 @@
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.task-table th, 
+.task-table td {
+  padding: 12px;
+  text-align: left;
+  color: white;
+  border-bottom: 1px solid #444;
+}
+.task-table td {
+   
+    color: white !important;
+   
+  }
+
+.task-table th {
+  background-color: #1e293b;
+  font-weight: 600;
+  font-size: 16px !important;
+  text-align: left !important;
+}
+
+.task-table td {
+  background-color: #0f172a;
+}
+
+/* Optional: fixed column width */
+.task-table th:nth-child(1),
+.task-table td:nth-child(1) {
+  width: 40%;
+}
+
+.task-table th:nth-child(2),
+.task-table td:nth-child(2),
+.task-table th:nth-child(3),
+.task-table td:nth-child(3),
+.task-table th:nth-child(4),
+.task-table td:nth-child(4) {
+  width: 20%;
+}
+
+/* Status color (for span.task-status) */
+.task-status.completed {
+  background-color: #22c55e;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.task-status.failed {
+  background-color: #ef4444;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.task-status.running {
+  background-color: #3b82f6;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.task-status.scheduled {
+  background-color: #facc15;
+  color: black;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.task-run-table-container{
+    border: #22c55e 3px solid !important;
+    transition: all 0.3s ease !important;
+}

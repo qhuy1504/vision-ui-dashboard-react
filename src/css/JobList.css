@@ -1,0 +1,47 @@
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  
+  .status-running {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .status-pending {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .status-completed {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .status-failed {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .status-crashed {
+    background-color: #ff8605;
+    color: white;
+  }
+  .status-scheduled {
+    background-color: #7000b1;
+    color: white;
+  }
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: #910000;
+  }
+  .job-table td{
+    background-color: #fcfcfc;
+  }

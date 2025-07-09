@@ -1,0 +1,364 @@
+/* JobDetail.css */
+
+.job-detail-container {
+    padding: 16px;
+    background-color: #f9fafc;
+    border-radius: 12px;
+  }
+  
+  /* Prefect Variable */
+  .job-detail-container .prefect-variable {
+    margin-bottom: 16px;
+  }
+  
+  .prefect-variable-item {
+    display: flex;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px dashed #ccc;
+  }
+  
+  .prefect-variable-key {
+    font-weight: bold;
+    min-width: 120px;
+  }
+  
+  /* Task Table */
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  
+  .task-table th,
+  .task-table td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .task-table th {
+    background-color: #f0f4f8;
+    font-weight: 600;
+    color: #444;
+  }
+  
+  .task-table td {
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  /* Log Display */
+  .log-box {
+    background-color: #f7f9fb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+  }
+  
+  .log-box .log-line {
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .log-box .log-line.warn {
+    color: #f57c00;
+  }
+  
+  .log-box .log-line.error {
+    color: #d32f2f;
+  }
+  
+  .log-box .log-line.info {
+    color: #1976d2;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  /* Task Table Container - responsive */
+.task-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 16px;
+  }
+  
+  /* Task Table */
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 640px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Table Header */
+  .task-table th {
+    padding: 12px 16px;
+    text-align: left;
+    background-color: #f5f7fa;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  /* Table Body */
+  .task-table td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #222;
+    border-top: 1px solid #eee;
+  }
+  
+  /* Hover effect */
+  .task-table tbody tr:hover {
+    background-color: #f0f8ff;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  /* Status badges */
+  .status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  
+  .status.scheduled {
+    background-color: #9e9e9e;
+  }
+  
+  .status.completed,
+  .status.success {
+    background-color: #4caf50;
+  }
+  
+  .status.failed,
+  .status.error {
+    background-color: #f44336;
+  }
+  
+  .status.running {
+    background-color: #2196f3;
+  }
+  
+  .status.pending {
+    background-color: #ff9800;
+  }
+  
+  .status.cancelled {
+    background-color: #607d8b;
+  }
+  
+  .flow-run-card {
+    background-color: #2a2a3b !important;  
+    padding: 1rem;
+    border-radius: 8px;
+    color: white;
+    border-left: 6px solid transparent; /* mặc định */
+    transition: border-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 255, 128, 0.3);
+  }
+  
+  /* Màu border theo trạng thái */
+  .flow-run-card.running {
+    border-left-color: #007bff; /* xanh lá */
+  }
+  .flow-run-card.pending {
+    border-left-color: #ff9800; /* cam */
+  }
+  .flow-run-card.scheduled {
+    border-left-color: #ffc107;; /* xanh dương nhạt */
+  }
+  .flow-run-card.completed {
+    border-left-color: #4caf50; /* xanh thành công */
+  }
+  .flow-run-card.failed {
+    border-left-color: #f44336; /* đỏ */
+  }
+  .flow-run-card.crashed {
+    border-left-color: #9c27b0; /* tím */
+  }
+
+  .flow-run-card:hover {
+    background-color: #1e1e2f; /* màu nền hover đẹp hơn */
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 255, 128, 0.3); /* ánh sáng nhẹ */
+    transform: translateY(-2px); /* nổi lên nhẹ */
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .flow-run-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .flow-run-name {
+    font-size: 20px !important;
+    font-weight: bold;
+    color: #ffffff !important;
+  }
+  
+  .flow-run-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .tag {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #fff;
+    font-weight: 500;
+    text-transform: capitalize;
+    display: inline-block;
+  }
+  
+  /* Trạng thái cụ thể */
+  .tag.running {
+    background-color: #007bff; /* xanh dương */
+    border: 1px solid #0063cc;
+  }
+  
+  .tag.pending,
+  .tag.scheduled {
+    background-color: #ffc107; /* vàng */
+    border: 1px solid #e0a800;
+    color: #000;
+  }
+  
+  .tag.completed {
+    background-color: #28a745; /* xanh lá */
+    border: 1px solid #218838;
+  }
+  
+  .tag.failed {
+    background-color: #dc3545; /* đỏ */
+    border: 1px solid #c82333;
+  }
+  
+  .tag.crashed {
+    background-color: #6f42c1; /* tím */
+    border: 1px solid #5936a4;
+  }
+  
+  .task-status {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+  }
+  
+  /* Trạng thái cụ thể */
+  .task-status.running {
+    background-color: #1e88e5;
+    color: #fff;
+  }
+  
+  .task-status.pending {
+    background-color: #fbc02d;
+    color: #000;
+  }
+  
+  .task-status.scheduled {
+    background-color: #7e57c2;
+    color: #fff;
+  }
+  
+  .task-status.completed {
+    background-color: #43a047;
+    color: #fff;
+  }
+  
+  .task-status.failed {
+    background-color: #e53935;
+    color: #fff;
+  }
+  
+  .task-status.crashed {
+    background-color: #8e24aa;
+    color: #fff;
+  }
+  .log-terminal {
+    background-color: #f3f3f3;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    color: #000000;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    font-weight: bold;
+  }
+  
+  /* Dòng log mặc định */
+  .log-line {
+    font-weight: bold;
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+  }
+  
+  /* Time và logger format */
+  .log-time {
+    font-weight: bold;
+    color: #129700;
+  }
+  .log-level {
+    
+    font-weight: bold;
+  }
+  .log-logger {
+    color: #03a9f4;
+  }
+  
+  /* Màu theo level */
+  .log-line.info {
+    color: #000000;
+    font-weight: bold;
+  }
+  .log-line.warning {
+    color: #ffeb3b;
+  }
+  .log-line.error {
+    color: #f44336;
+  }
+  .log-line.debug {
+    color: #90caf9;
+  }
+  .log-line.critical {
+    color: #ff5722;
+  }
+  .log-line.empty {
+    color: #888;
+    font-style: italic;
+    font-size: 15px;
+  }
+    

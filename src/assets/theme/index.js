@@ -100,6 +100,9 @@ export default createTheme({
       styleOverrides: {
         ...globals,
         ...container,
+        body: {
+          backgroundColor: "rgba(255, 255, 255, 0.4)",
+        },
       },
     },
     MuiDrawer: { ...sidenav },

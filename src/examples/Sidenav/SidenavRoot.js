@@ -75,17 +75,12 @@ export default styled(Drawer)(({ theme, ownerState }) => {
 
   return {
     "& .MuiDrawer-paper": {
-      boxShadow: xxl,
-      border: "none",
-      background: transparentSidenav
-      ? transparent.main
-      : linearGradient(
-            gradients.sidenav.main,
-            gradients.sidenav.state,
-            gradients.sidenav.deg
-          ),
-    backdropFilter: transparentSidenav ? "unset" : "blur(120px)",
+      
+      backgroundColor: "rgba(220, 240, 244, 0.2)",
+      backdropFilter: "blur(12px)",
+      border: "1px solid rgba(255, 255, 255, 0.3)",
+      boxShadow: "0 8px 32px 0 rgba(255, 255, 255, 0.2)",
       ...(miniSidenav ? drawerCloseStyles() : drawerOpenStyles()),
-    },
+    }
   };
 });

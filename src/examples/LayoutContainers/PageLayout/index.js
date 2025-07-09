@@ -53,6 +53,8 @@ function PageLayout({ children }) {
           gradients.cover.deg
         ),
         position: "relative",
+        
+        
       })}
     >
       {children}

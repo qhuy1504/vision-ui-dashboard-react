@@ -41,9 +41,12 @@ function DashboardLayout({ children }) {
 
   return (
     <VuiBox
-      sx={({ breakpoints, transitions, functions: { pxToRem } }) => ({
+      sx={({ breakpoints, transitions, functions: { pxToRem }, palette }) => ({
         p: 3,
         position: "relative",
+        deg: "127.09",
+        main: "rgba(232, 232, 232, 0.58) 0%",
+        state: "rgba(255, 255, 255, 0.3) 100%",
 
         [breakpoints.up("xl")]: {
           marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),

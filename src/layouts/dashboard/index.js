@@ -44,6 +44,14 @@ import OrderOverview from "layouts/dashboard/components/OrderOverview";
 import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
 import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
 
+//CUSTOM VẼ LẠI
+import FlowRunChart from "layouts/dashboard/components/FlowRunChart";
+import TaskRunLineChart from "layouts/dashboard/components/TaskRunLineChart";
+import FlowPerDeploymentChart from "./components/FlowPerDeploymentChart";
+import PieRunChart from "./components/PieRunChart";
+import TaskRunListTable from "./components/TaskRunListTable";
+import RecordsBarChartByDate from "./components/RecordsBarChartByDate";
+
 // React icons
 import { IoIosRocket } from "react-icons/io";
 import { IoGlobe } from "react-icons/io5";
@@ -59,18 +67,128 @@ import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
 import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
+import LineChartTableSize from "layouts/dashboard/components/LineChartTableSize";
+import TopCntRowByDate from "./components/TopCntRowByDate";
+// Prefect data
+import { barChartDataDashboardPre } from "layouts/dashboard/data/barChartDataPre";
+import { barChartOptionsDashboardPre } from "layouts/dashboard/data/barChartOptionsPre";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
+  const [jobList, setJobList] = useState([]);
+  const [selectedJobId, setSelectedJobId] = useState(null);
+
+
+  
+  
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs`);
+        console.log("Fetched jobs:", res.data);
+        setJobList(res.data || []);
+        if (res.data.length > 0) {
+          setSelectedJobId(res.data[0].id); // mặc định chọn job đầu tiên
+        }
+      } catch (err) {
+        console.error("Failed to fetch jobs:", err);
+      }
+    }
+
+    fetchJobs();
+  }, []);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
+
+      <VuiBox py={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={12} lg={12}>
+            <TopCntRowByDate />
+          </Grid>
+        </Grid>
+      </VuiBox>
+
+      <VuiBox py={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={12} lg={12}>
+            <RecordsBarChartByDate />
+          </Grid>
+        </Grid>
+      </VuiBox>
+
+      <VuiBox py={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={12} lg={12}>
+            <LineChartTableSize />
+          </Grid>
+        </Grid>
+      </VuiBox>
+
+     
+      
+
+      <VuiBox mb={3}>
+        <label style={{ color: "white", marginRight: 10 }}>Chọn Job:</label>
+        <select
+          style={{
+            padding: "8px",
+            borderRadius: "6px",
+            fontSize: "16px",
+          }}
+          value={selectedJobId || ""}
+          onChange={(e) => {
+            const selected = Number(e.target.value);
+            console.log("Bạn vừa chọn Job ID:", selected);
+            setSelectedJobId(selected);
+          }}
+          
+        >
+          {jobList.map((job) => (
+            <option key={job.id} value={Number(job.id)}>
+              {job.name || `Job ${job.id}`}
+            </option>
+          ))}
+        </select>
+      </VuiBox>
+
+
+
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} xl={3}>
+            
+            {selectedJobId && (
+              <>
+                <Grid item xs={12} md={6} lg={4}>
+                  <FlowRunChart key={selectedJobId}  jobId={selectedJobId} />
+                </Grid>
+
+                <Grid item xs={12} md={6} lg={6}>
+                  <TaskRunLineChart key={selectedJobId}  jobId={selectedJobId} />
+                </Grid>
+
+                <Grid item xs={12} md={6} lg={6}>
+                  <FlowPerDeploymentChart key={selectedJobId} jobId={selectedJobId} />
+                </Grid>
+
+                <Grid item xs={12} md={6} lg={6}>
+                  <PieRunChart key={selectedJobId} jobId={selectedJobId} />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TaskRunListTable key={selectedJobId} jobId={selectedJobId} />
+                </Grid>
+              </>
+            )}
+
+            
+
+            {/* <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "today's money", fontWeight: "regular" }}
                 count="$53,000"
@@ -101,7 +219,7 @@ function Dashboard() {
                 percentage={{ color: "success", text: "+5%" }}
                 icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </VuiBox>
         <VuiBox mb={3}>

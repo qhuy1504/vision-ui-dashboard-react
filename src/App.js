@@ -45,6 +45,11 @@ import createCache from "@emotion/cache";
 // Vision UI Dashboard React routes
 import routes from "routes";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
 // Vision UI Dashboard React contexts
 import { useVisionUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
@@ -95,18 +100,22 @@ export default function App() {
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
 
-  const getRoutes = (allRoutes) =>
-    allRoutes.map((route) => {
+  const getRoutes = (allRoutes) => {
+    const result = [];
+
+    allRoutes.forEach((route) => {
       if (route.collapse) {
-        return getRoutes(route.collapse);
+        result.push(...getRoutes(route.collapse));
+      } else if (route.route) {
+        result.push(
+          <Route exact path={route.route} component={route.component} key={route.key} />
+        );
       }
-
-      if (route.route) {
-        return <Route exact path={route.route} component={route.component} key={route.key} />;
-      }
-
-      return null;
     });
+
+    return result;
+  };
+  
 
   const configsButton = (
     <VuiBox
@@ -163,7 +172,7 @@ export default function App() {
       {layout === "dashboard" && (
         <>
           <Sidenav
-            color={sidenavColor}
+              color={sidenavColor} routes
             brand=""
             brandName="VISION UI FREE"
             routes={routes}
@@ -177,8 +186,11 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Switch>
         {getRoutes(routes)}
-        <Redirect from="*" to="/dashboard" />
-      </Switch>
+        <Redirect from="*" to="/jobs" />
+        </Switch>
+      
+        <ToastContainer position="top-right" autoClose={3000} />
+
     </ThemeProvider>
   );
 }

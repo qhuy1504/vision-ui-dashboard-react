@@ -24,7 +24,7 @@
 export default {
   // Vision UI Colors
   background: {
-    default: "#f8f9fa",
+    default: "#ebf7ff",
   },
 
   sidenav: {
@@ -126,6 +126,7 @@ export default {
   light: {
     main: "#e9ecef",
     focus: "#ebeff4",
+    body: "rgba(255, 255, 255, 0.4)",
   },
 
   dark: {

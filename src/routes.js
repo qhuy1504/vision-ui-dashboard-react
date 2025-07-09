@@ -46,15 +46,20 @@ import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import JobFormPage from "pages/JobFormPage";
+import JobListPage from "pages/JobListPage"; // Uncomment if you have a JobListPage
+import JobDetailPage from "pages/JobDetailPage"; // Uncomment if you have a JobDetailPage
+import TableListPage from "pages/TableListPage"; // Uncomment if you have a TableListPage
 
 // Vision UI Dashboard React icons
-import { IoRocketSharp } from "react-icons/io5";
+import { IoAccessibility, IoAdd, IoAddSharp, IoAnalytics, IoListCircleOutline, IoRocketSharp } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
 import { IoBuild } from "react-icons/io5";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
+import Icon from "@mui/material/Icon";
 
 const routes = [
   {
@@ -64,6 +69,40 @@ const routes = [
     route: "/dashboard",
     icon: <IoHome size="15px" color="inherit" />,
     component: Dashboard,
+    noCollapse: true,
+  },
+  
+  {
+    type: "collapse",
+    name: "Thêm Job",
+    key: "add-job",
+    icon: <IoRocketSharp size="15px" color="inherit" />,
+    route: "/jobs/new",
+    component: JobFormPage,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Danh sách Job",
+    key: "list-job",
+    icon: <IoAnalytics size="15px" color="inherit" />,
+    route: "/jobs",
+    component: JobListPage,
+    noCollapse: true,
+  },
+  {
+    route: "/jobs/:jobId",
+    component: JobDetailPage,
+    noCollapse: true,
+    hidden: true,
+  },
+  {
+    type: "collapse",
+    name: "Danh sách Bảng",
+    key: "list-table",
+    icon: <IoAnalytics size="15px" color="inherit" />,
+    route: "/tablelist",
+    component: TableListPage,
     noCollapse: true,
   },
   {
@@ -84,15 +123,15 @@ const routes = [
     component: Billing,
     noCollapse: true,
   },
-  {
-    type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    route: "/rtl",
-    icon: <IoBuild size="15px" color="inherit" />,
-    component: RTL,
-    noCollapse: true,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "RTL",
+  //   key: "rtl",
+  //   route: "/rtl",
+  //   icon: <IoBuild size="15px" color="inherit" />,
+  //   component: RTL,
+  //   noCollapse: true,
+  // },
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",
@@ -120,7 +159,7 @@ const routes = [
     icon: <IoRocketSharp size="15px" color="inherit" />,
     component: SignUp,
     noCollapse: true,
-  },
+  }
 ];
 
 export default routes;
