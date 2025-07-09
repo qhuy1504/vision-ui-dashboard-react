@@ -41,7 +41,7 @@ const JobDetailPage = () => {
     if (loading)
         return (
             <DashboardLayout>
-                <VuiTypography variant="h4" color="white">Loading...</VuiTypography>
+                <VuiTypography variant="h4" color="black">Loading...</VuiTypography>
             </DashboardLayout>
         );
 
@@ -102,7 +102,7 @@ const JobDetailPage = () => {
                     )}
                 </VuiButton>
 
-                <VuiTypography variant="h4" fontWeight="bold" color="white">
+                <VuiTypography variant="h4" fontWeight="bold" color="black">
                     Chi tiết Job #{jobId}
                 </VuiTypography>
 
@@ -117,7 +117,7 @@ const JobDetailPage = () => {
                                 {Object.entries(variables).map(([key, val]) => (
                                     <React.Fragment key={key}>
                                         <Grid item xs={12} sm={4} md={3}>
-                                            <Typography variant="subtitle2" color="primary" fontWeight="bold">
+                                            <Typography variant="subtitle2" color="white" fontWeight="bold">
                                                 {key}
                                             </Typography>
                                         </Grid>
@@ -186,7 +186,7 @@ const JobDetailPage = () => {
                             {isOpen && (
                                 <>
                                     <VuiBox mt={2}>
-                                        <VuiTypography variant="h6" color="white">Task Runs</VuiTypography>
+                                        <VuiTypography variant="h6" color="black">Task Runs</VuiTypography>
                                         <table className="task-table">
                                             <thead>
                                                 <tr>
@@ -241,7 +241,7 @@ const JobDetailPage = () => {
                                     </VuiBox>
 
                                     <VuiBox mt={3}>
-                                        <VuiTypography variant="h6" color="white" mb={1}>Logs</VuiTypography>
+                                        <VuiTypography variant="h6" color="black" mb={1}>Logs</VuiTypography>
 
                                         <div className="log-terminal">
                                             {logList.length > 0 ? (
