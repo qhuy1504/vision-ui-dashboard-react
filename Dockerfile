@@ -5,7 +5,7 @@
     
     # Copy package.json và cài dependencies
     COPY package*.json ./
-    RUN npm install
+    RUN npm install --legacy-peer-deps
     
     # Copy toàn bộ source code vào
     COPY . .
