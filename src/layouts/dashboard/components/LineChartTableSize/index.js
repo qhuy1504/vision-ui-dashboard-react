@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
 import _ from "lodash";
+import colors from "assets/theme/base/colors";
 
 const LineChartTableSize = () => {
     const [data, setData] = useState([]);
@@ -76,6 +77,7 @@ const LineChartTableSize = () => {
 
         const chartData = [
             {
+                color: "black",
                 x: start?.data_date ,
                 y: start?.size_mb,
             },
@@ -105,14 +107,14 @@ const LineChartTableSize = () => {
                 type: "category",
                 title: {
                     text: "Thời điểm", style: {
-                        color: "#ffffff", // hoặc "white"
+                        color: "black",
                         fontSize: "14px", // tuỳ chỉnh thêm nếu cần
                         fontWeight: 600,  // tuỳ chỉnh thêm
                     },
                 },
                 labels: {
                     style: {
-                        colors: "#ffffff", 
+                      
                         fontSize: "14px",
                         fontWeight: 600,  
                     },
@@ -121,14 +123,14 @@ const LineChartTableSize = () => {
             yaxis: {
                 title: {
                     text: "Dung lượng (MB)", style: {
-                        color: "#ffffff", 
+                        
                         fontSize: "14px", 
                         fontWeight: 600,  
                     },
                 },
                 labels: {
                     style: {
-                        colors: "#ffffff",
+                       
                         fontSize: "14px",
                         fontWeight: 600,  
                     },
@@ -138,7 +140,7 @@ const LineChartTableSize = () => {
                 text: `${label} - ${selectedTable}`,
                 align: "left",
                 style: {
-                    color: "#ffffff", // hoặc "white"
+                    color: "black",
                     fontSize: "16px", // tuỳ chỉnh thêm nếu cần
                     fontWeight: 600,  // tuỳ chỉnh thêm
                 },
@@ -158,7 +160,7 @@ const LineChartTableSize = () => {
                                 label: {
                                     borderColor: "#00e396",
                                     style: {
-                                        color: "#fff",
+                                        
                                         background: "#00e396",
                                     },
                                     text: "Đầu tháng",
@@ -176,9 +178,10 @@ const LineChartTableSize = () => {
                                     fillColor: "#FF4560",
                                 },
                                 label: {
+                                    
                                     borderColor: "#FF4560",
                                     style: {
-                                        color: "#fff",
+                                       
                                         background: "#FF4560",
                                     },
                                     text: "Cuối tháng",
@@ -245,13 +248,13 @@ const LineChartTableSize = () => {
 
             {/* Chênh lệch */}
             {startPoint && endPoint && (
-                <div style={{ color: "white", marginTop: 10 }}>
+                <div style={{  marginTop: 10 }}>
                     <strong>Chênh lệch:</strong>{" "}
                     {(endPoint.size_mb - startPoint.size_mb).toFixed(2)} MB
                 </div>
             )}
             {startPoint && !endPoint && (
-                <div style={{ color: "white", marginTop: 10 }}>
+                <div style={{ marginTop: 10 }}>
                     <strong>Dung lượng đầu tháng:</strong> {startPoint.size_mb} MB
                 </div>
             )}

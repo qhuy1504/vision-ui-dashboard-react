@@ -101,7 +101,7 @@ export default createTheme({
         ...globals,
         ...container,
         body: {
-          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          backgroundColor: "#f0f0f0",
         },
       },
     },

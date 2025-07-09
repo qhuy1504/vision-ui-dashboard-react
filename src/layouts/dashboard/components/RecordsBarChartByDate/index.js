@@ -79,13 +79,13 @@ const RecordsBarChartByDate = () => {
                 categories: tableNames,
                 title: {
                     text: "Số bản ghi",
-                    style: { color: "#ffffff", fontSize: "16px" },
+                    style: { color: "black", fontSize: "16px" },
                     
                 },
                 
                 labels: {
                     style: {
-                        colors: "#ffffff",
+                        colors: "black",
                         fontSize: "14px",
                     },
                 },
@@ -93,7 +93,7 @@ const RecordsBarChartByDate = () => {
             yaxis: {
                 labels: {
                     style: {
-                        colors: "#ffffff",
+                        colors: "black",
                         fontSize: "14px",
                     },
                 },
@@ -102,7 +102,7 @@ const RecordsBarChartByDate = () => {
                 text: `Top bảng theo số records - ${selectedDate}`,
                 align: "left",
                 style: {
-                    color: "#ffffff",
+                    color: "black",
                     fontSize: "16px",
                     fontWeight: 600,
                 },
@@ -139,7 +139,7 @@ const RecordsBarChartByDate = () => {
                         height="100%"
                     />
                 ) : (
-                    <div style={{ color: "white", marginTop: 10 }}>
+                    <div style={{ color: "black", marginTop: 10 }}>
                         Không có dữ liệu cho ngày đã chọn.
                     </div>
                 )}

@@ -32,19 +32,19 @@ const PieRunChart = ({ jobId }) => {
 
                     style: {
                         fontSize: "16px",
-                        color: "#ffffff",
+                        color: "black",
                     },
                 },
                 colors: ["#9b02c9", "#000dff", "#00c703", "#ff0000", "#8f7e00", "#ffd500"],
                 legend: {
                     position: "bottom",
                     labels: {
-                        colors: "#fff",
+                        colors: "black",
                     },
                 },
                 dataLabels: {
                     style: {
-                        colors: ["#fff"],
+                        colors: ["black"],
                     },
                 },
                 tooltip: {

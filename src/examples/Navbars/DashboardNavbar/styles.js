@@ -77,11 +77,10 @@ function navbar(theme, ownerState) {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+      backgroundColor: "darkblue !important",
+      borderRadius: "12px !important",
 
-      [breakpoints.up("sm")]: {
-        minHeight: "auto",
-        padding: `${pxToRem(4)} ${pxToRem(16)}`,
-      },
+      
     },
   };
 }

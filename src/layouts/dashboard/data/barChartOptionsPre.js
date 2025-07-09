@@ -9,7 +9,8 @@ export const barChartOptionsDashboardPre = () => ({
 
         style: {
             fontSize: "16px",
-            color: "#ffffff",
+            color: "black",
+            fontFamily: "Arial, sans-serif",
         },
     },
     plotOptions: {
@@ -24,7 +25,7 @@ export const barChartOptionsDashboardPre = () => ({
         show: true,
         position: "bottom",
         labels: {
-            colors: Array(6).fill("#ffffff"),
+            colors: Array(6).fill("black"),
         },
         fontSize: "14px",
         fontWeight: 400,
@@ -44,14 +45,14 @@ export const barChartOptionsDashboardPre = () => ({
         ],
         labels: {
             style: {
-                colors: "#fff",
+                colors: "black",
             },
         },
     },
     yaxis: {
         labels: {
             style: {
-                colors: "#fff",
+                colors: "black",
             },
         },
     },

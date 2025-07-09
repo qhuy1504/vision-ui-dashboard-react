@@ -13,21 +13,21 @@ export const lineChartOptionsTaskRun = (taskRunStats) => {
 
             style: {
                 fontSize: "16px",
-                color: "#ffffff",
+                color: "black",
             },
         },
         xaxis: {
             categories: entries.map(([date]) => date),
             labels: {
                 style: {
-                    colors: "#fff",
+                    colors: "black",
                 },
             },
         },
         yaxis: {
             labels: {
                 style: {
-                    colors: "#fff",
+                    colors: "black",
                 },
             },
         },

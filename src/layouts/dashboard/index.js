@@ -133,7 +133,7 @@ function Dashboard() {
       
 
       <VuiBox mb={3}>
-        <label style={{ color: "white", marginRight: 10 }}>Chọn Job:</label>
+        <label style={{ marginRight: 10 }}>Chọn Job:</label>
         <select
           style={{
             padding: "8px",
@@ -240,7 +240,7 @@ function Dashboard() {
             <Grid item xs={12} lg={6} xl={7}>
               <Card>
                 <VuiBox sx={{ height: "100%" }}>
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
+                  <VuiTypography variant="lg" fontWeight="bold" mb="5px">
                     Sales Overview
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
@@ -280,7 +280,7 @@ function Dashboard() {
                       barChartOptions={barChartOptionsDashboard}
                     />
                   </VuiBox>
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
+                  <VuiTypography variant="lg" fontWeight="bold" mb="5px">
                     Active Users
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
@@ -311,7 +311,7 @@ function Dashboard() {
                           Users
                         </VuiTypography>
                       </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      <VuiTypography  variant="lg" fontWeight="bold" mb="8px">
                         32,984
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
@@ -335,7 +335,7 @@ function Dashboard() {
                           Clicks
                         </VuiTypography>
                       </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      <VuiTypography  variant="lg" fontWeight="bold" mb="8px">
                         2,42M
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
@@ -359,7 +359,7 @@ function Dashboard() {
                           Sales
                         </VuiTypography>
                       </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      <VuiTypography  variant="lg" fontWeight="bold" mb="8px">
                         2,400$
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
@@ -383,7 +383,7 @@ function Dashboard() {
                           Items
                         </VuiTypography>
                       </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
+                      <VuiTypography  variant="lg" fontWeight="bold" mb="8px">
                         320
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />

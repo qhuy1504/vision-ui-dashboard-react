@@ -59,16 +59,16 @@ const TopCntRowByDate = () => {
             plotOptions: {
                 bar: { vertical: true, borderRadius: 4, barHeight: "70%" },
             },
-            dataLabels: { enabled: true, style: { colors: ["#fff"] } },
+            dataLabels: { enabled: true, style: { colors: ["black"] } },
             xaxis: {
                 categories: names,
-                title: { text: "CNT_ROW", style: { color: "#fff" } },
-                labels: { style: { colors: "#fff", fontSize: "14px" } },
+                title: { text: "CNT_ROW", style: { color: "black" } },
+                labels: { style: { colors: "black", fontSize: "14px" } },
             },
-            yaxis: { labels: { style: { colors: "#fff", fontSize: "14px" } } },
+            yaxis: { labels: { style: { colors: "black", fontSize: "14px" } } },
             title: {
                 text: `Top 15 CNT_ROW - ${selectedDate}`,
-                style: { color: "#fff", fontSize: "16px" },
+                style: { color: "black", fontSize: "16px" },
                 align: "left",
             },
             tooltip: { theme: "dark" },
@@ -78,7 +78,7 @@ const TopCntRowByDate = () => {
 
     return (
         <div style={{ marginBottom: 24 }}>
-            <label style={{ color: "#fff", marginRight: 8 }}>Chọn ngày:</label>
+            <label style={{ color: "black", marginRight: 8 }}>Chọn ngày:</label>
             <select
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
@@ -98,7 +98,7 @@ const TopCntRowByDate = () => {
                     height={400}
                 />
             ) : (
-                <div style={{ color: "#fff", marginTop: 10 }}>
+                    <div style={{ color: "black", marginTop: 10 }}>
                     {selectedDate ? "Không có dữ liệu." : "Hãy chọn ngày để xem biểu đồ."}
                 </div>
             )}

@@ -76,7 +76,7 @@ export default styled(Drawer)(({ theme, ownerState }) => {
   return {
     "& .MuiDrawer-paper": {
       
-      backgroundColor: "rgba(220, 240, 244, 0.2)",
+      backgroundColor: "#1565c0",
       backdropFilter: "blur(12px)",
       border: "1px solid rgba(255, 255, 255, 0.3)",
       boxShadow: "0 8px 32px 0 rgba(255, 255, 255, 0.2)",

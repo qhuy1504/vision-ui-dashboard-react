@@ -10,21 +10,21 @@ export const barChartOptionsDeployment = (dataObject) => {
             
             style: {
                 fontSize: "16px",
-                color: "#ffffff",
+                color: "black",
             },
         },
         xaxis: {
             categories: Object.keys(dataObject), // ["Manual", "f6a...", "84d..."]
             labels: {
                 style: {
-                    colors: "#fff",
+                    colors: "black",
                 },
             },
         },
         yaxis: {
             labels: {
                 style: {
-                    colors: "#fff",
+                    colors: "black",
                 },
             },
         },

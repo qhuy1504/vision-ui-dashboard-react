@@ -33,7 +33,7 @@ export default {
 
   text: {
     main: "#a0aec0",
-    focus: "#ffffff",
+    focus: "black",
   },
 
   transparent: {
@@ -132,7 +132,7 @@ export default {
   dark: {
     main: "#344767",
     focus: "#121241",
-    body: "#030c1d",
+    body: "#f0f0f0",
   },
 
   gradients: {
