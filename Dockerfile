@@ -25,3 +25,4 @@
     # Khởi động nginx
     CMD ["nginx", "-g", "daemon off;"]
     
+    # No additional instructions needed here

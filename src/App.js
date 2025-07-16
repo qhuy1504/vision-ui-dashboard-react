@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the software.
-
-*/
 
 import { useState, useEffect, useMemo } from "react";
 
@@ -43,10 +26,12 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
 // Vision UI Dashboard React routes
-import routes from "routes";
+// import routes from "routes";
+import { getFilteredRoutes } from "./utils/auth";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PrivateRoute from "./utils/privateRoute";
 
 
 
@@ -59,6 +44,9 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  const routes = getFilteredRoutes(); 
+  // console.log("Filtered routes:", routes);
+
 
   // Cache for the rtl
   useMemo(() => {
@@ -106,11 +94,19 @@ export default function App() {
     allRoutes.forEach((route) => {
       if (route.collapse) {
         result.push(...getRoutes(route.collapse));
-      } else if (route.route) {
+      } else if (route.route && route.component) {
+        const isAuthPage = route.route.startsWith("/authentication");
+        // Nếu là trang xác thực, sử dụng PrivateRoute
         result.push(
-          <Route exact path={route.route} component={route.component} key={route.key} />
+          isAuthPage ? (
+            <Route exact path={route.route} component={route.component} key={route.key} />
+            
+          ) : (
+              <PrivateRoute exact path={route.route} component={route.component} key={route.key} />
+          )
         );
-      }
+      } 
+      
     });
 
     return result;
@@ -184,10 +180,16 @@ export default function App() {
         </>
       )}
       {layout === "vr" && <Configurator />}
-      <Switch>
-        {getRoutes(routes)}
-        <Redirect from="*" to="/jobs" />
+        <Switch>
+          {/* Route mặc định khi truy cập / */}
+          <Redirect exact from="/" to="/authentication/sign-in" />
+
+          {getRoutes(routes)}
+
+          {/* Route fallback nếu không khớp cái nào */}
+          <Redirect from="*" to="/authentication/sign-in" />
         </Switch>
+
       
         <ToastContainer position="top-right" autoClose={3000} />
 

@@ -11,6 +11,7 @@ export const barChartOptionsDeployment = (dataObject) => {
             style: {
                 fontSize: "16px",
                 color: "black",
+                fontFamily: "Noto Sans, sans-serif", // Changed to Noto Sans
             },
         },
         xaxis: {

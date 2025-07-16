@@ -158,11 +158,11 @@ export default styled(InputBase)(({ theme, ownerState }) => {
   };
 
   return {
-    backgroundColor: disabled ? `${grey[200]} !important` : white.main,
+    backgroundColor: "#f0f0f0", // nền trắng
+    color: "#111827",            // màu chữ đen nhạt
     pointerEvents: disabled ? "none" : "auto",
-    backgroundColor: `${disabled ? grey[600] : inputColors.backgroundColor} !important`,
-    color: `${white.main} !important`,
     borderRadius: borderRadius.lg,
+    border: `1px solid ${grey[400]}`,
     border: `0.5px solid ${grey[600]}`,
     ...(size === "small" && smallStyles()),
     ...(size === "medium" && mediumStyles()),
@@ -171,7 +171,7 @@ export default styled(InputBase)(({ theme, ownerState }) => {
     ...(success && successStyles()),
     ...((iconDirection === "left" || iconDirection === "right") && withIconStyles()),
     "& ::placeholder": {
-      color: `${white.main} !important`,
+      color: `#6b7280`,
       fontSize: "12px",
     },
 

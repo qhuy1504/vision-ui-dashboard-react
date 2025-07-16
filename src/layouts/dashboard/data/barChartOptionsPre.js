@@ -10,7 +10,7 @@ export const barChartOptionsDashboardPre = () => ({
         style: {
             fontSize: "16px",
             color: "black",
-            fontFamily: "Arial, sans-serif",
+            fontFamily: "Noto Sans, sans-serif",
         },
     },
     plotOptions: {

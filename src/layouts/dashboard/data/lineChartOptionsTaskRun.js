@@ -14,6 +14,7 @@ export const lineChartOptionsTaskRun = (taskRunStats) => {
             style: {
                 fontSize: "16px",
                 color: "black",
+                fontFamily: "Noto Sans, sans-serif",
             },
         },
         xaxis: {

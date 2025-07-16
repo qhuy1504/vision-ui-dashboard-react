@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
+import { RiFontFamily } from "react-icons/ri";
 
 const RecordsBarChartByDate = () => {
     const [data, setData] = useState([]);
@@ -79,7 +80,7 @@ const RecordsBarChartByDate = () => {
                 categories: tableNames,
                 title: {
                     text: "Số bản ghi",
-                    style: { color: "black", fontSize: "16px" },
+                    style: { color: "black", fontSize: "16px", fontFamily: "Noto Sans, sans-serif" },
                     
                 },
                 

@@ -61,8 +61,8 @@ function CoverLayout({
       <DefaultNavbar
         action={{
           type: "external",
-          route: "https://creative-tim.com/product/vision-ui-dashboard-pro-react",
-          label: "BUY NOW",
+          route: "",
+          label: "WELCOME",
         }}
       />
       <VuiBox
@@ -70,6 +70,7 @@ function CoverLayout({
         width="50vw"
         display={{ xs: "none", md: "block" }}
         position="absolute"
+      
         top={0}
         left={0}
         sx={({ breakpoints }) => ({
@@ -218,7 +219,7 @@ CoverLayout.defaultProps = {
   title: "",
   description: "",
   color: "info",
-  top: 20,
+  top: 10,
 };
 
 // Typechecking props for the CoverLayout

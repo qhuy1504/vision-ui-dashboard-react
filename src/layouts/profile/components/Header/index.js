@@ -1,20 +1,4 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
+import { getUserFromToken } from "../../../../utils/auth";
 
 import AppBar from "@mui/material/AppBar";
 // @mui material components
@@ -37,10 +21,17 @@ import { IoBuild } from "react-icons/io5";
 // Vision UI Dashboard React example components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { useEffect, useState } from "react";
+import {
+  Avatar
+} from "@mui/material";
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
+
+  // Get user information from token
+  const user = getUserFromToken();
+  console.log("User information:", user);
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -104,8 +95,8 @@ function Header() {
               },
             })}
           >
-            <VuiAvatar
-              src={burceMars}
+            <Avatar
+              src={user?.avatar}
               alt="profile-image"
               variant="rounded"
               size="xl"
@@ -126,11 +117,11 @@ function Header() {
                 },
               })}
             >
-              <VuiTypography variant="lg" color="white" fontWeight="bold">
-                Mark Johnson
+              <VuiTypography variant="lg" color="black" fontWeight="bold">
+               {`Xin chào, ${user?.username || "user"}!`}
               </VuiTypography>
-              <VuiTypography variant="button" color="text" fontWeight="regular">
-                mark@simmmple.com
+              <VuiTypography variant="button" color="black" fontWeight="regular">
+                {`${user?.email ? user.email : "user@example.com"}`}
               </VuiTypography>
             </VuiBox>
           </Grid>

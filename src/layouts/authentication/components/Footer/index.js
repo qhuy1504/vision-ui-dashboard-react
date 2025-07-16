@@ -47,20 +47,20 @@ function Footer() {
           <VuiTypography
             variant="button"
             sx={{ textAlign: "center", fontWeight: "400 !important" }}
-            color="text"
+            color="white"
           >
-            @ 2021, Made with ❤️&nbsp;&nbsp;&nbsp; by{" "}
+            
             <VuiTypography
               component="a"
               variant="button"
               href="#"
               sx={{ textAlign: "center", fontWeight: "500 !important" }}
-              color="text"
+              color="white"
               mr="2px"
             >
-              Simmmple
+              
             </VuiTypography>
-            &
+            
             <VuiTypography
               ml="2px"
               mr="2px"
@@ -68,27 +68,27 @@ function Footer() {
               variant="button"
               href="#"
               sx={{ textAlign: "center", fontWeight: "500 !important" }}
-              color="text"
+              color="white"
             >
-              Creative Tim
+              PREFECT
             </VuiTypography>
-            for a better web
+             BEST FOR RUN FLOWS
           </VuiTypography>
         </Grid>
         <Grid item xs={10}>
           <VuiBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
             <VuiBox mr={{ xs: "20px", lg: "46px" }}>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
+              <VuiTypography component="a" href="#" variant="body2" color="white">
                 Marketplace
               </VuiTypography>
             </VuiBox>
             <VuiBox mr={{ xs: "20px", lg: "46px" }}>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
+              <VuiTypography component="a" href="#" variant="body2" color="white">
                 Blog
               </VuiTypography>
             </VuiBox>
             <VuiBox>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
+              <VuiTypography component="a" href="#" variant="body2" color="white">
                 License
               </VuiTypography>
             </VuiBox>

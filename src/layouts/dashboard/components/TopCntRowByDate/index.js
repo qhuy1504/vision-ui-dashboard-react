@@ -62,13 +62,13 @@ const TopCntRowByDate = () => {
             dataLabels: { enabled: true, style: { colors: ["black"] } },
             xaxis: {
                 categories: names,
-                title: { text: "CNT_ROW", style: { color: "black" } },
+                title: { text: "CNT_ROW", style: {  color: "black", fontFamily: "Noto Sans, sans-serif" } },
                 labels: { style: { colors: "black", fontSize: "14px" } },
             },
             yaxis: { labels: { style: { colors: "black", fontSize: "14px" } } },
             title: {
                 text: `Top 15 CNT_ROW - ${selectedDate}`,
-                style: { color: "black", fontSize: "16px" },
+                style: { color: "black", fontSize: "16px", fontFamily: "Noto Sans, sans-serif" },
                 align: "left",
             },
             tooltip: { theme: "dark" },

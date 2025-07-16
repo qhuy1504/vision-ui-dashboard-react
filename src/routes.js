@@ -1,43 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-/** 
-  All of the routes for the Vision UI Dashboard React are added here,
-  You can add a new route, customize the routes and delete the routes here.
-
-  Once you add a new route on this file it will be visible automatically on
-  the Sidenav.
-
-  For adding a new route you can follow the existing routes in the routes array.
-  1. The `type` key with the `collapse` value is used for a route.
-  2. The `type` key with the `title` value is used for a title inside the Sidenav. 
-  3. The `type` key with the `divider` value is used for a divider between Sidenav items.
-  4. The `name` key is used for the name of the route on the Sidenav.
-  5. The `key` key is used for the key of the route (It will help you with the key prop inside a loop).
-  6. The `icon` key is used for the icon of the route on the Sidenav, you have to add a node.
-  7. The `collapse` key is used for making a collapsible item on the Sidenav that has other routes
-  inside (nested routes), you need to pass the nested routes inside an array as a value for the `collapse` key.
-  8. The `route` key is used to store the route location which is used for the react router.
-  9. The `href` key is used to store the external links location.
-  10. The `title` key is only for the item with the type of `title` and its used for the title text on the Sidenav.
-  10. The `component` key is used to store the component of its route.
-*/
-
 // Vision UI Dashboard React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
@@ -46,13 +6,19 @@ import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import ForgotPassword from "layouts/authentication/forgot";
+import VerifyOtp from "layouts/authentication/verifyotp";
+import ResetPassword from "layouts/authentication/resetpassword";
+import ChangePassword from "layouts/authentication/changepassword";
 import JobFormPage from "pages/JobFormPage";
 import JobListPage from "pages/JobListPage"; // Uncomment if you have a JobListPage
 import JobDetailPage from "pages/JobDetailPage"; // Uncomment if you have a JobDetailPage
 import TableListPage from "pages/TableListPage"; // Uncomment if you have a TableListPage
+import AdminAssignPage from "pages/AdminAssignPage"; // Uncomment if you have an AdminAssignPage
+import ImportData from "pages/ImportData"; // Import the new ImportData page
 
 // Vision UI Dashboard React icons
-import { IoAccessibility, IoAdd, IoAddSharp, IoAnalytics, IoListCircleOutline, IoRocketSharp } from "react-icons/io5";
+import { IoAccessibility, IoAdd, IoAddSharp, IoAnalytics, IoListCircleOutline, IoRocketSharp, IoFileTrayFullSharp } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
 import { IoBuild } from "react-icons/io5";
@@ -64,7 +30,7 @@ import Icon from "@mui/material/Icon";
 const routes = [
   {
     type: "collapse",
-    name: "Dashboard",
+    name: "DASHBOARD",
     key: "dashboard",
     route: "/dashboard",
     icon: <IoHome size="15px" color="inherit" />,
@@ -74,7 +40,7 @@ const routes = [
   
   {
     type: "collapse",
-    name: "Thêm Job",
+    name: "THÊM JOB",
     key: "add-job",
     icon: <IoRocketSharp size="15px" color="inherit" />,
     route: "/jobs/new",
@@ -83,7 +49,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Danh sách Job",
+    name: "DANH SÁCH JOB",
     key: "list-job",
     icon: <IoAnalytics size="15px" color="inherit" />,
     route: "/jobs",
@@ -98,7 +64,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Danh sách Bảng",
+    name: "DANH SÁCH BẢNG",
     key: "list-table",
     icon: <IoAnalytics size="15px" color="inherit" />,
     route: "/tablelist",
@@ -107,7 +73,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Tables",
+    name: "TABLES",
     key: "tables",
     route: "/tables",
     icon: <IoStatsChart size="15px" color="inherit" />,
@@ -116,7 +82,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Billing",
+    name: "BILLING",
     key: "billing",
     route: "/billing",
     icon: <BsCreditCardFill size="15px" color="inherit" />,
@@ -135,7 +101,7 @@ const routes = [
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",
-    name: "Profile",
+    name: "PROFILE",
     key: "profile",
     route: "/profile",
     icon: <BsFillPersonFill size="15px" color="inherit" />,
@@ -143,7 +109,7 @@ const routes = [
     noCollapse: true,
   },
   {
-    type: "collapse",
+   
     name: "Sign In",
     key: "sign-in",
     route: "/authentication/sign-in",
@@ -152,14 +118,68 @@ const routes = [
     noCollapse: true,
   },
   {
-    type: "collapse",
+   
     name: "Sign Up",
     key: "sign-up",
     route: "/authentication/sign-up",
     icon: <IoRocketSharp size="15px" color="inherit" />,
     component: SignUp,
     noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "PHÂN QUYỀN",
+    key: "assign-groups",
+    route: "/assign-groups",
+    icon: <IoRocketSharp size="15px" color="inherit" />,
+    component: AdminAssignPage,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "IMPORT DATA",
+    key: "import-data",
+    icon: <IoFileTrayFullSharp size="15px" color="inherit" />,
+    route: "/import",
+    component: ImportData,
+    noCollapse: true,
+  },
+  {
+   
+    name: "QUÊN MẬT KHẨU",
+    key: "forgot-password",
+    icon: <IoFileTrayFullSharp size="15px" color="inherit" />,
+    route: "/authentication/forgot-password",
+    component: ForgotPassword,
+    noCollapse: true,
+  },
+  {
+
+    name: "NHẬP OTP",
+    key: "verify-otp",
+    icon: <IoFileTrayFullSharp size="15px" color="inherit" />,
+    route: "/authentication/verify-otp",
+    component: VerifyOtp,
+    noCollapse: true,
+  },
+  {
+    name: "ĐẶT LẠI MẬT KHẨU",
+    key: "reset-password",
+    icon: <IoFileTrayFullSharp size="15px" color="inherit" />,
+    route: "/authentication/reset-password",
+    component: ResetPassword,
+    noCollapse: true,
+  },
+  {
+    name: "ĐỔI MẬT KHẨU",
+    key: "change-password",
+    icon: <IoFileTrayFullSharp size="15px" color="inherit" />,
+    route: "/authentication/change-password",
+    component: ChangePassword,
+    noCollapse: true,
   }
+
+
 ];
 
 export default routes;

@@ -1,0 +1,54 @@
+.table-list {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+  margin-top: 16px;
+  
+}
+
+.table-list th,
+.table-list td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.table-list th {
+  background-color: #1e88e5;
+  font-weight: bold;
+}
+
+.table-list tr:hover {
+  background-color: #f1f1f1;
+}
+
+.btn-delete {
+  background-color: #d32f2f;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #b71c1c;
+}
+.btn-edit{
+  background-color: #43a047;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  background-color: #115293;
+}

@@ -33,6 +33,7 @@ const PieRunChart = ({ jobId }) => {
                     style: {
                         fontSize: "16px",
                         color: "black",
+                        fontFamily: "Noto Sans, sans-serif", // Changed to Noto Sans
                     },
                 },
                 colors: ["#9b02c9", "#000dff", "#00c703", "#ff0000", "#8f7e00", "#ffd500"],
@@ -44,7 +45,7 @@ const PieRunChart = ({ jobId }) => {
                 },
                 dataLabels: {
                     style: {
-                        colors: ["black"],
+                        colors: ["white"],
                     },
                 },
                 tooltip: {

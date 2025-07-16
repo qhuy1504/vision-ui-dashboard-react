@@ -161,10 +161,10 @@ export default {
     },
 
     cover: {
-      deg: "159.02",
-      main: "#0f123b 14.25%",
-      state: "#090d2e 56.45%",
-      stateSecondary: "#020515 86.14%",
+      deg: "100",
+      main: "#1e88e5",
+      state: "#1e88e5",
+      stateSecondary: "#1e88e5",
     },
 
     cardDark: {
