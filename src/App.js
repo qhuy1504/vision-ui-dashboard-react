@@ -26,12 +26,14 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
 // Vision UI Dashboard React routes
-// import routes from "routes";
-import { getFilteredRoutes } from "./utils/auth";
+import routes from "routes";
+// import { getFilteredRoutes } from "./utils/auth";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./utils/privateRoute";
+
+import ChatBox from "examples/Configurator/ChatBox.js";
 
 
 
@@ -44,8 +46,9 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
-  const routes = getFilteredRoutes(); 
-  // console.log("Filtered routes:", routes);
+  const [openChat, setOpenChat] = useState(false);
+  // const routes = getFilteredRoutes(); 
+
 
 
   // Cache for the rtl
@@ -132,10 +135,42 @@ export default function App() {
       onClick={handleConfiguratorOpen}
     >
       <Icon fontSize="default" color="inherit">
-        settings
+        chat
       </Icon>
     </VuiBox>
   );
+
+//CHAT AI
+  const chatButton = (
+    <>
+      <VuiBox
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width="3.5rem"
+        height="3.5rem"
+        bgColor="info"
+        shadow="sm"
+        borderRadius="50%"
+        position="fixed"
+        right="2rem"
+        bottom="2rem"
+        zIndex={99}
+        color="white"
+        sx={{ cursor: "pointer" }}
+        onClick={() => setOpenChat(true)}
+      >
+        <Icon fontSize="default" color="inherit">
+          chat
+        </Icon>
+      </VuiBox>
+
+      <ChatBox open={openChat} onClose={() => setOpenChat(false)} />
+    </>
+  );
+
+
+
 
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
@@ -176,7 +211,7 @@ export default function App() {
             onMouseLeave={handleOnMouseLeave}
           />
           <Configurator />
-          {configsButton}
+            {chatButton}
         </>
       )}
       {layout === "vr" && <Configurator />}

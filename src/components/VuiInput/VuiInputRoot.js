@@ -159,7 +159,8 @@ export default styled(InputBase)(({ theme, ownerState }) => {
 
   return {
     backgroundColor: "#f0f0f0", // nền trắng
-    color: "#111827",            // màu chữ đen nhạt
+    color: "#111827",
+    width: "100%",
     pointerEvents: disabled ? "none" : "auto",
     borderRadius: borderRadius.lg,
     border: `1px solid ${grey[400]}`,

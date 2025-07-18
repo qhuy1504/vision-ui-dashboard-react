@@ -177,7 +177,8 @@ const routes = [
     route: "/authentication/change-password",
     component: ChangePassword,
     noCollapse: true,
-  }
+  },
+
 
 
 ];
