@@ -26,8 +26,8 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
 // Vision UI Dashboard React routes
-import routes from "routes";
-// import { getFilteredRoutes } from "./utils/auth";
+// import routes from "routes";
+import { getFilteredRoutes } from "./utils/auth";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,7 +47,7 @@ export default function App() {
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
   const [openChat, setOpenChat] = useState(false);
-  // const routes = getFilteredRoutes(); 
+  const routes = getFilteredRoutes(); 
 
 
 

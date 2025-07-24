@@ -74,6 +74,7 @@ function SignIn() {
       localStorage.setItem("menus", JSON.stringify(data.menus));
       console.log("Token:", data.token);
       console.log("Menus:", data.menus);
+      console.log("Đăng nhập thành công:", data);
 
       setSnackbar({
         open: true,

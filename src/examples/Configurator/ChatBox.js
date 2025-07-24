@@ -92,21 +92,43 @@ const ChatBox = ({ open, onClose, externalMessage }) => {
         setLoading(true);
 
         try {
-            // Giới hạn context (ví dụ: 10 tin nhắn gần nhất)
-            const MAX_CONTEXT = 10;
-            const contextMessages = newMessages.slice(-MAX_CONTEXT);
+            // Giới hạn context (ví dụ: 3 tin nhắn gần nhất)
+            const MAX_CONTEXT = 1;
+            const contextMessages = newMessages.slice(-MAX_CONTEXT).map(msg => {
+                let text = msg.text;
 
-            const formattedMessages = contextMessages.map((msg) => ({
-                role: msg.from === "user" ? "user" : "assistant",
-                content: msg.text,
-            }));
+                // Nếu tin nhắn quá dài, lấy 1-2 câu đầu tiên
+                if (text.length > 100) {
+                    const sentences = text.split(/[.?!]\s/); // tách câu theo dấu chấm, hỏi, chấm than
+                    text = sentences.slice(0, 2).join('. ') + '.';
+                    console.log("Truncated message to:", text);
+                }
 
-            const res = await fetch("http://localhost:3001/api/ai/ask-ai", {
+                // Gán ngữ cảnh rõ ràng hơn
+                const role = msg.from === "user" ? "user" : "ai";
+                const prefixedText =
+                    role === "ai"
+                        ? `${text}`
+                        : `${text}`;
+
+                return {
+                    role,
+                    content: prefixedText,
+                };
+            });
+
+
+
+            console.log("Context messages:", contextMessages);
+
+       
+            const res = await fetch("http://localhost:3001/api/ai/ask-ollama", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    messages: formattedMessages,
+                    prompt: contextMessages.map(msg => `${msg.content}`).join('\n'),
                 }),
+
             });
 
             const data = await res.json();

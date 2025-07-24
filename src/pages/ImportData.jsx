@@ -55,10 +55,10 @@ function ImportData() {
     });
 
     const [aiSummary, setAiSummary] = useState("");
-    const [chatOpen, setChatOpen] = useState(true); 
+    const [chatOpen, setChatOpen] = useState(true);
     const [externalMessage, setExternalMessage] = useState(null);
 
-    
+
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -104,35 +104,30 @@ function ImportData() {
                 setCurrentPage(1);
 
                 // Gửi sang AI để phân tích
+                const slicedData = result.data.slice(0, 5); // 10 dòng đầu
+                const formattedQA = slicedData;
+
                 try {
-                    const resAI = await fetch("http://localhost:3001/api/ai/ask-ai", {
+                    const resAI = await fetch("http://localhost:3001/api/ai/ask-ollama", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            messages: [
-                                {
-                                    role: "user",
-                                    content: `
-Dữ liệu mẫu: ${JSON.stringify(result.data.slice(0, 150))}
-Bạn là một chuyên gia phân tích dữ liệu. Hãy giúp tôi đánh giá tổng quát bảng dữ liệu sau và đưa ra những phân tích chi tiết:
-- Tổng số dòng và cột của bảng dữ liệu.
-- Những cột nào có dữ liệu bị thiếu hoặc không hợp lệ? Mức độ thiếu hụt ra sao (tính theo % số dòng)?
-- Các cột số có giá trị trung bình, nhỏ nhất, lớn nhất là bao nhiêu?
-- Có sự bất thường (outliers) nào trong dữ liệu số không? Nếu có, hãy nêu cụ thể.
-- Cấu trúc dữ liệu có đồng nhất và chuẩn hóa chưa? Có trùng lặp hay không?
-- Những mối quan hệ đáng chú ý giữa các cột ?
-- Có vấn đề gì khiến việc phân tích bị hạn chế không (ví dụ: thiếu nhãn, nhiều dữ liệu rỗng, dữ liệu nhiễu)?
-- Đề xuất các bước xử lý hoặc cải thiện dữ liệu này để phục vụ mục tiêu phân tích chính xác hơn.
-`
+                            prompt: `
+                            
+                            ${JSON.stringify(formattedQA, null, 2)}
+                           Tên bảng: "${tableName.trim()}"  
+                           Các cột: ${columns.join(", ")}
+                           Hãy phản hồi dựa trên dữ liệu trên.
 
-                                }
-                            ]
+                            `.trim()
                         }),
                     });
-                    console.log("Result data:", result.data.slice(0, 150));
+
+                    console.log("formattedQA:", JSON.stringify(formattedQA, null, 2));
 
 
-               
+
+
                     const aiResult = await resAI.json();
                     console.log("AI Result:", aiResult);
                     if (aiResult.text && aiResult.text.trim() !== "") {

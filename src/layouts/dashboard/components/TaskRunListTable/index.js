@@ -42,6 +42,21 @@ const formatDateTime = (isoString) => {
 
 const TaskRunListTable = ({ jobId }) => {
     const [taskRuns, setTaskRuns] = useState([]);
+    const [page, setPage] = useState(0);
+    const rowsPerPage = 25;
+    const paginatedTasks = taskRuns
+        .map((task) => {
+            const isScheduled = (task.state || "").toUpperCase() === "SCHEDULED";
+            return {
+                ...task,
+                state: task.state || "SCHEDULED",
+                isScheduled,
+                startTimeObj: task.start_time ? new Date(task.start_time) : new Date(0),
+            };
+        })
+        .sort((a, b) => b.startTimeObj - a.startTimeObj)
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -79,7 +94,7 @@ const TaskRunListTable = ({ jobId }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {taskRuns
+                            {paginatedTasks
                                 .map((task) => {
                                     const isScheduled = (task.state || "").toUpperCase() === "SCHEDULED";
                                     return {
@@ -117,6 +132,26 @@ const TaskRunListTable = ({ jobId }) => {
                                 ))}
                         </tbody>
                     </table>
+                    <div className="pagination" style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+                        <button class="page-btn prev"
+                            onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
+                            disabled={page === 0}
+                            style={{ marginRight: "8px" }}
+                        >
+                            Trang trước
+                        </button>
+                        <span style={{ color: "white", alignSelf: "center" }}>
+                            Trang {page + 1} / {Math.ceil(taskRuns.length / rowsPerPage)}
+                        </span>
+                        <button class="page-btn next"
+                            onClick={() => setPage((prev) => (prev + 1 < Math.ceil(taskRuns.length / rowsPerPage) ? prev + 1 : prev))}
+                            disabled={(page + 1) * rowsPerPage >= taskRuns.length}
+                            style={{ marginLeft: "8px" }}
+                        >
+                            Trang sau
+                        </button>
+                    </div>
+
                 </VuiBox>
 
             </TableContainer>

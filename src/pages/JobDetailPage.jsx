@@ -298,7 +298,8 @@ const JobDetailPage = () => {
                                     onClick={() => setCurrentPage(page)}
                                     size="small"
                                     style={{ margin: '0 4px' }}
-                                    color={page === currentPage ? "primary" : "default"}
+                                    color={page === currentPage ? "black" : "black"}
+
                                 >
                                     {page}
                                 </VuiButton>

@@ -44,6 +44,17 @@ export const isAuthenticated = () => {
 const publicPathPrefixes = ["/jobs/"]; // Cho phép tất cả path bắt đầu bằng /jobs/
 
 export const getFilteredRoutes = () => {
+    // Lấy user từ token
+    const user = getUserFromToken();
+    console.log("User from token:", user);
+
+    // Nếu là admin thì trả tất cả routes
+    if (user && user.username === "admin") {
+        console.log("User is admin, returning all routes");
+        return allRoutes;
+    }
+
+    // Nếu không phải admin thì lọc theo menus
     let allowedPaths = [];
 
     try {
@@ -51,7 +62,7 @@ export const getFilteredRoutes = () => {
         allowedPaths = menus.map((m) => m.path);
     } catch (err) {
         console.error("Lỗi khi lấy menus từ localStorage:", err);
-        return allRoutes;
+        return allRoutes; // fallback an toàn
     }
 
     return allRoutes.filter((route) => {
@@ -65,6 +76,7 @@ export const getFilteredRoutes = () => {
         return isAuthRoute || isAllowedByMenu || isPublicPrefix;
     });
 };
+
 
 
   
