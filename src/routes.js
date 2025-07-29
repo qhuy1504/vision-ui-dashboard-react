@@ -16,9 +16,10 @@ import JobDetailPage from "pages/JobDetailPage"; // Uncomment if you have a JobD
 import TableListPage from "pages/TableListPage"; // Uncomment if you have a TableListPage
 import AdminAssignPage from "pages/AdminAssignPage"; // Uncomment if you have an AdminAssignPage
 import ImportData from "pages/ImportData"; // Import the new ImportData page
+import EnvForm from "pages/EnvForm"; // Import the new EnvForm page
 
 // Vision UI Dashboard React icons
-import { IoAccessibility, IoAdd, IoAddSharp, IoAnalytics, IoListCircleOutline, IoRocketSharp, IoFileTrayFullSharp } from "react-icons/io5";
+import { IoAccessibility, IoAdd, IoAddSharp, IoAnalytics, IoListCircleOutline, IoRocketSharp, IoFileTrayFullSharp, IoSettings } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
 import { IoBuild } from "react-icons/io5";
@@ -73,11 +74,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "TABLES",
-    key: "tables",
-    route: "/tables",
-    icon: <IoStatsChart size="15px" color="inherit" />,
-    component: Tables,
+    name: "ENV CONFIG",
+    key: "env-config",
+    route: "/env-config",
+    icon: <IoSettings size="15px" color="inherit" />,
+    component: EnvForm,
     noCollapse: true,
   },
   {
