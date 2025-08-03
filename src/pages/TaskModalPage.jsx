@@ -17,23 +17,18 @@ const TaskModalPage = ({ job, onClose, onTasksUpdated }) => {
 
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            if (job) {
-                fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${job.id}/task-logs`)
-                    .then((res) => res.json())
-                    .then(setTaskLogs);
-            }
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [job]);
-
-    useEffect(() => {
         const fetchTasks = async () => {
             if (!job) return;
             setIsLoading(true);
             setError(null);
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${job.id}/tasks`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${job.id}/tasks`, {
+                    method: 'GET',
+                    headers: {
+                        'X-API-KEY': process.env.REACT_APP_ADMIN_API_KEY
+                    }
+                });
+
                 if (!response.ok) throw new Error("Failed to fetch tasks");
                 const data = await response.json();
                 setTasks(data);
@@ -64,7 +59,7 @@ const TaskModalPage = ({ job, onClose, onTasksUpdated }) => {
         try {
             const response = await fetch(endpoint, {
                 method,
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY },
                 body: JSON.stringify(taskToSave),
             });
             if (!response.ok) throw new Error("Failed to save task");
@@ -72,7 +67,14 @@ const TaskModalPage = ({ job, onClose, onTasksUpdated }) => {
             setEditingTaskId(null);
             onTasksUpdated();
 
-            const updated = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${job.id}/tasks`);
+            const updated = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${job.id}/tasks`, {
+                method: "GET",
+                headers: {
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                    "Content-Type": "application/json"
+                }
+            });
+
             setTasks(await updated.json());
         } catch (err) {
             toast.error(err.message);
@@ -84,6 +86,10 @@ const TaskModalPage = ({ job, onClose, onTasksUpdated }) => {
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/tasks/${job_task_id}`, {
                 method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                },
             });
             if (response.status !== 204) throw new Error("Failed to delete task");
             setTasks(tasks.filter((t) => t.job_task_id !== job_task_id));

@@ -11,7 +11,14 @@ const TaskRunLineChart = ({ jobId }) => {
 
     useEffect(() => {
         async function fetchData() {
-            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/${jobId}/tasks/detail`);
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/jobs/${jobId}/tasks/detail`,
+                {
+                    headers: {
+                        "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                    },
+                }
+            );
             const stats = data.taskRunStats || [];
 
             setChartData(lineChartDataTaskRun(stats));

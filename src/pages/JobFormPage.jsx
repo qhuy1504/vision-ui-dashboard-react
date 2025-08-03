@@ -72,7 +72,7 @@ const JobFormPage = () => {
             for (const task of tasksToAdd) {
                 await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/tasks/${jobId}`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_ADMIN_API_KEY },
                     body: JSON.stringify(task)
                 });
             }
@@ -94,6 +94,7 @@ const JobFormPage = () => {
             });
 
             toast.success(`Thêm thành công ${tasksToAdd.length} tasks to Job ID: ${jobId}!`);
+            history.push("/jobs");
         } catch (error) {
             toast.error(`Failed to add tasks: ${error.message}`);
         }
@@ -137,7 +138,8 @@ const JobFormPage = () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/batch`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json", "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY },
                 body: JSON.stringify(jobData),
             });
 

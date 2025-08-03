@@ -27,7 +27,9 @@ const ChatBox = ({ open, onClose, externalMessage }) => {
     // [{from: "user"|"ai", text: "..."}]
     const [loading, setLoading] = useState(false);
     const lastExternalRef = useRef("");
-   
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const adminApiKey = process.env.REACT_APP_ADMIN_API_KEY;
 
 
     // Scroll xuống cuối
@@ -121,10 +123,10 @@ const ChatBox = ({ open, onClose, externalMessage }) => {
 
             console.log("Context messages:", contextMessages);
 
-       
-            const res = await fetch("http://localhost:3001/api/ai/ask-ollama", {
+
+            const res = await fetch(`${apiUrl}/api/ai/ask-ollama`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-API-KEY": adminApiKey },
                 body: JSON.stringify({
                     prompt: contextMessages.map(msg => `${msg.content}`).join('\n'),
                 }),

@@ -50,12 +50,16 @@ function SignIn() {
   const handleCloseSnackbar = () => {
     setSnackbar((prev) => ({ ...prev, open: false }));
   };
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const adminApiKey = process.env.REACT_APP_ADMIN_API_KEY;
 
   const handleSignIn = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/admin/login", {
+      const res = await fetch(`${apiUrl}/api/admin/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json", "X-API-KEY": adminApiKey,
+ },
         body: JSON.stringify(formData),
       });
 
@@ -72,9 +76,9 @@ function SignIn() {
       const data = await res.json();
       localStorage.setItem("token", data.token);
       localStorage.setItem("menus", JSON.stringify(data.menus));
-      console.log("Token:", data.token);
-      console.log("Menus:", data.menus);
-      console.log("Đăng nhập thành công:", data);
+      // console.log("Token:", data.token);
+      // console.log("Menus:", data.menus);
+      // console.log("Đăng nhập thành công:", data);
 
       setSnackbar({
         open: true,

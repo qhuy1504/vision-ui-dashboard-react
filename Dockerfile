@@ -5,6 +5,8 @@ WORKDIR /app
 
 # Copy package.json và cài dependencies
 COPY package*.json ./
+COPY .env .env 
+
 RUN npm install --legacy-peer-deps
 
 # Copy toàn bộ source code vào

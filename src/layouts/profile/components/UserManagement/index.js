@@ -27,10 +27,16 @@ const UserManagement = () => {
 
 
     const fetchUsers = async () => {
-        const res = await fetch("http://localhost:3001/api/admin/users");
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/admin/users`, {
+            headers: {
+                "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+            },
+        });
+
         const data = await res.json();
         setUsers(data);
     };
+
 
     useEffect(() => {
         fetchUsers();
@@ -51,8 +57,11 @@ const UserManagement = () => {
 
     const confirmDelete = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/users/${userToDelete}`, {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/admin/users/${userToDelete}`, {
                 method: "DELETE",
+                headers: {
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                },
             });
 
             if (!res.ok) {
@@ -78,11 +87,17 @@ const UserManagement = () => {
         formData.append("name", editingUser.name);
         formData.append("email", editingUser.email);
         if (editingUser.avatarFile) formData.append("avatar", editingUser.avatarFile);
+        for (let [key, value] of formData.entries()) {
+            console.log(`IN ${key}:`, value);
+        }
 
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/users/${editingUser.id}`, {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/admin/users/${editingUser.id}`, {
                 method: "PUT",
                 body: formData,
+                headers: {
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                },
             });
 
             if (!res.ok) {

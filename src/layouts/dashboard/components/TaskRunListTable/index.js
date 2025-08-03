@@ -60,7 +60,14 @@ const TaskRunListTable = ({ jobId }) => {
 
     useEffect(() => {
         async function fetchData() {
-            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/${jobId}/tasks/detail`);
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/jobs/${jobId}/tasks/detail`,
+                {
+                    headers: {
+                        "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                    },
+                }
+            );
 
             // Flatten tất cả các task từ các flow_run_id
             const allTasks = Object.values(data.taskRunsByFlowRun || {}).flat();

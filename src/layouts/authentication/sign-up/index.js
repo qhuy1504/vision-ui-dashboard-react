@@ -35,6 +35,12 @@ import bgSignIn from "assets/images/signUpImage.png";
 
 
 function SignUp() {
+
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const adminApiKey = process.env.REACT_APP_ADMIN_API_KEY;
+
+
   const [rememberMe, setRememberMe] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -46,6 +52,7 @@ function SignUp() {
 
   const history = useHistory();
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,10 +79,14 @@ function SignUp() {
       if (formData.avatar) {
         payload.append("avatar", formData.avatar);
       }
+      console.log("formData.avatar:", formData.avatar);
 
-      const res = await fetch("http://localhost:3001/api/admin/users", {
+      const res = await fetch(`${apiUrl}/api/admin/users`, {
         method: "POST",
         body: payload,
+        headers: {
+          "X-API-KEY": adminApiKey,
+        },
       });
 
       const data = await res.json();

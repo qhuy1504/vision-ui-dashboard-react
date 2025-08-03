@@ -16,9 +16,9 @@ function VerifyOtp() {
 
     const handleVerify = async () => {
         try {
-            const res = await fetch("http://localhost:3001/api/auth/verify-otp", {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/verify-otp`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY },
                 body: JSON.stringify({ email, otp }),
             });
 

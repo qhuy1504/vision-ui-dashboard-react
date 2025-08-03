@@ -1,20 +1,4 @@
-/*!
 
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -87,7 +71,15 @@ function Dashboard() {
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/jobs/`,
+          {
+            headers: {
+              "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+            },
+          }
+        );
+
         console.log("Fetched jobs:", res.data);
         setJobList(res.data || []);
         if (res.data.length > 0) {

@@ -30,7 +30,14 @@ const JobListPage = () => {
 
     const fetchJobs = async () => {
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs`);
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/`, {
+                method: "GET", // mặc định là GET, nhưng nên khai rõ
+                headers: {
+                    "Content-Type": "application/json", // tùy chọn, nhưng thường nên có
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                },
+            });
+
             if (!res.ok) throw new Error("Failed to fetch jobs");
             const data = await res.json();
             setJobs(data);
@@ -38,10 +45,10 @@ const JobListPage = () => {
             toast.error("Không thể tải danh sách jobs");
         }
     };
-    function fetchWithTimeout(url, ms = 5000) {
+    function fetchWithTimeout(url, options = {}, ms = 5000) {
         const ctrl = new AbortController();
         const t = setTimeout(() => ctrl.abort(), ms);
-        return fetch(url, { signal: ctrl.signal }).finally(() => clearTimeout(t));
+        return fetch(url, { ...options, signal: ctrl.signal }).finally(() => clearTimeout(t));
     }
     const refreshStatuses = async () => {
         const current = jobsRef.current;
@@ -53,7 +60,18 @@ const JobListPage = () => {
         const updates = await Promise.all(
             updating.map(async j => {
                 try {
-                    const res = await fetchWithTimeout(`${process.env.REACT_APP_API_URL}/api/jobs/flow-run-status/${j.flow_run_id}`, 5000);
+                    const res = await fetchWithTimeout(
+                        `${process.env.REACT_APP_API_URL}/api/jobs/flow-run-status/${j.flow_run_id}`,
+                        {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                            },
+                        },
+                        5000
+                    );
+
                     const json = await res.json();
                     return { id: j.id, status: json.status?.toLowerCase() };
                 } catch (e) {
@@ -127,6 +145,10 @@ const JobListPage = () => {
         try {
             const res = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${jobId}`, {
                 method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                },
             });
             if (res.status !== 204) {
                 const errData = await res.json();
@@ -143,8 +165,13 @@ const JobListPage = () => {
         toast.info(`Triggering Job ID: ${jobId}...`);
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${jobId}/trigger`, {
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-KEY': process.env.REACT_APP_ADMIN_API_KEY
+                }
             });
+
             if (!response.ok) {
                 const errData = await response.json();
                 throw new Error(errData.error || 'Failed to trigger job');
@@ -183,6 +210,7 @@ const JobListPage = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-API-KEY': process.env.REACT_APP_ADMIN_API_KEY
                 },
                 body: JSON.stringify(payload),
             });

@@ -31,11 +31,18 @@ const TableListPage = () => {
 
     const fetchData = async () => {
         try {
+            const headers = {
+                headers: {
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                },
+            };
+
             const [res1, res2, res3] = await Promise.all([
-                axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-list`),
-                axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-size`),
-                axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-etl-log`),
+                axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-list`, headers),
+                axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-size`, headers),
+                axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-etl-log`, headers),
             ]);
+
             setTableList(res1.data || []);
             setTableSize(res2.data || []);
             setEtlLogs(res3.data || []);

@@ -15,9 +15,9 @@ function ForgotPassword() {
 
     const handleSendOtp = async () => {
         try {
-            const res = await fetch("http://localhost:3001/api/auth/forgot-password", {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/forgot-password`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY },
                 body: JSON.stringify({ email }),
             });
 

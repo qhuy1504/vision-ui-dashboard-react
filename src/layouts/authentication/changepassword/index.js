@@ -56,12 +56,13 @@ export default function ChangePassword() {
 
         try {
             const token = localStorage.getItem("token");
-            console.log("Token:", token);
-            const res = await fetch("http://localhost:3001/api/auth/change-password", {
+            // console.log("Token:", token);
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/change-password`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
+                    "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY, // Ensure you have this in your .env file
                 },
                 body: JSON.stringify({ currentPassword, newPassword, confirmPassword }),
             });

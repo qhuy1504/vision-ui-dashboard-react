@@ -59,7 +59,8 @@ function ImportData() {
     const [externalMessage, setExternalMessage] = useState(null);
 
 
-
+    const API_URL = process.env.REACT_APP_API_URL;
+    const API_KEY = process.env.REACT_APP_ADMIN_API_KEY;
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     };
@@ -81,7 +82,10 @@ function ImportData() {
         try {
             setLoading(true);
 
-            const res = await fetch("http://localhost:3001/api/import/upload", {
+            const res = await fetch(`${API_URL}/api/import/upload`, {
+                headers: {
+                    "X-API-KEY": API_KEY
+                },
                 method: "POST",
                 body: formData,
             });
@@ -108,9 +112,9 @@ function ImportData() {
                 const formattedQA = slicedData;
 
                 try {
-                    const resAI = await fetch("http://localhost:3001/api/ai/ask-ollama", {
+                    const resAI = await fetch(`${API_URL}/api/ai/ask-ollama`, {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        headers: { "Content-Type": "application/json", "X-API-KEY": API_KEY },
                         body: JSON.stringify({
                             prompt: `
                             

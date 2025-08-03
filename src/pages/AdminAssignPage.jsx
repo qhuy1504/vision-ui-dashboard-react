@@ -39,7 +39,7 @@ export default function AdminAssignPage() {
     const [menus, setMenus] = useState([]);
 
     const [selectedUser, setSelectedUser] = useState("");
-    const [selectedGroups, setSelectedGroups] = useState([]);
+    const [selectedGroups,  setSelectedGroups] = useState([]);
 
     const [selectedGroup, setSelectedGroup] = useState("");
     const [selectedRoles, setSelectedRoles] = useState([]);
@@ -79,26 +79,44 @@ export default function AdminAssignPage() {
 
     const [openDialogRole, setOpenDialogRole] = useState(false);
     const [openDialogMenu, setOpenDialogMenu] = useState(false);
-  
+
+    const API_URL = process.env.REACT_APP_API_URL;
+    const API_KEY = process.env.REACT_APP_ADMIN_API_KEY;
 
 
     const fetchUsers = async () => {
-        const res = await fetch("http://localhost:3001/api/admin/users");
+        const res = await fetch(`${API_URL}/api/admin/users`, {
+            headers: {
+                "X-API-KEY": API_KEY
+            }
+        });
         return res.json();
     };
 
     const fetchGroups = async () => {
-        const res = await fetch("http://localhost:3001/api/admin/groups");
+        const res = await fetch(`${API_URL}/api/admin/groups`, {
+            headers: {
+                "X-API-KEY": API_KEY
+            }
+        });
         return res.json();
     };
 
     const fetchRoles = async () => {
-        const res = await fetch("http://localhost:3001/api/admin/roles");
+        const res = await fetch(`${API_URL}/api/admin/roles`, {
+            headers: {
+                "X-API-KEY": API_KEY
+            }
+        });
         return res.json();
     };
 
     const fetchMenus = async () => {
-        const res = await fetch("http://localhost:3001/api/admin/menus");
+        const res = await fetch(`${API_URL}/api/admin/menus`, {
+            headers: {
+                "X-API-KEY": API_KEY
+            }
+        });
         return res.json();
     };
 
@@ -110,7 +128,7 @@ export default function AdminAssignPage() {
                 fetchRoles(),
                 fetchMenus()
             ]);
-
+            console.log("rolesData:", rolesData);
             setUsers(usersData);
             setGroups(groupsData);
             setRoles(rolesData);
@@ -122,10 +140,18 @@ export default function AdminAssignPage() {
 
     const getUserGroups = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/user-groups`);
+            const res = await fetch(`${API_URL}/api/admin/user-groups`, {
+                headers: {
+                    "X-API-KEY": API_KEY
+                }
+            });
+
             const data = await res.json();
-          
-            if (!res.ok) return alert("Lấy nhóm của user thất bại: " + (data.error || "Không xác định"));
+
+            if (!res.ok) {
+                return alert("Lấy nhóm của user thất bại: " + (data.error || "Không xác định"));
+            }
+
             setAssignedGroups(data);
         } catch (err) {
             console.error(err);
@@ -146,11 +172,13 @@ export default function AdminAssignPage() {
             });
         }
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/user-group/${selectedUser}`, {
+            const res = await fetch(`${API_URL}/api/admin/user-group/${selectedUser}`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-API-KEY": API_KEY },
                 body: JSON.stringify({ groupIds: selectedGroups }),
             });
+            console.log("typeof selectedGroups:", typeof selectedGroups);
+            console.log("isArray:", Array.isArray(selectedGroups));
 
             const data = await res.json();
             if (!res.ok) return alert("Gán nhóm thất bại: " + (data.error || "Không xác định"));
@@ -185,10 +213,11 @@ export default function AdminAssignPage() {
         if (!selectedItem) return;
 
         try {
-            const res = await fetch("http://localhost:3001/api/admin/user-group/remove", {
+            const res = await fetch(`${API_URL}/api/admin/user-group/remove`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
+                    "X-API-KEY": API_KEY
                 },
                 body: JSON.stringify({
                     user_id: selectedItem.user_id,
@@ -229,7 +258,11 @@ export default function AdminAssignPage() {
 
     const getGroupRoles = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/group-roles`);
+            const res = await fetch(`${API_URL}/api/admin/group-roles`, {
+                headers: {
+                    "X-API-KEY": API_KEY
+                }
+            });
             const data = await res.json();
            
             if (!res.ok) return alert("Lấy nhóm của user thất bại: " + (data.error || "Không xác định"));
@@ -251,10 +284,13 @@ export default function AdminAssignPage() {
 
     const handleAssignRoles = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/group-roles/${selectedGroups}`, {
+            const res = await fetch(`${API_URL}/api/admin/group-roles/${selectedGroups}`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ roleIds: selectedRoles.map(id => String(id)), }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-API-KEY": API_KEY
+                },
+                body: JSON.stringify({ roleIds: selectedRoles.map(id => Number(id)), }),
             });
 
             const data = await res.json();
@@ -297,9 +333,9 @@ export default function AdminAssignPage() {
         try {
             const item = selectedRoleToDelete;
             console.log("Xoá vai trò khỏi nhóm:", item);
-            const res = await fetch("http://localhost:3001/api/admin/group-role/remove", {
+            const res = await fetch(`${API_URL}/api/admin/group-role/remove`, {
                 method: "DELETE",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-API-KEY": API_KEY },
                 body: JSON.stringify({
                     group_id: item.group_id,
                     
@@ -341,11 +377,16 @@ export default function AdminAssignPage() {
 
     const getRoleMenus = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/role-menus`);
+            const res = await fetch(`${API_URL}/api/admin/role-menus`, {
+                headers: {
+                    "X-API-KEY": API_KEY
+                }
+            });
             const data = await res.json();
             
             if (!res.ok) return alert("Lấy menu của role thất bại: " + (data.error || "Không xác định"));
             setAssignedMenus(data);
+            console.log("assignedMenus:", data);
         } catch (err) {
             console.error(err);
             setSnackbar({
@@ -364,9 +405,9 @@ export default function AdminAssignPage() {
 
     const handleAssignMenus = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/role-menu/${selectedRoles}`, {
+            const res = await fetch(`${API_URL}/api/admin/role-menu/${selectedRoles}`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "X-API-KEY": API_KEY },
                 body: JSON.stringify({ menuIds: selectedMenus }),
             });
 
@@ -407,10 +448,11 @@ export default function AdminAssignPage() {
 
     const handleRemoveMenusFromRole = async (roleId) => {
         try {
-            const res = await fetch(`http://localhost:3001/api/admin/role-menu/${roleId}`, {
+            const res = await fetch(`${API_URL}/api/admin/role-menu/${roleId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
+                    "X-API-KEY": API_KEY
                 },
                 body: JSON.stringify({ role_id: roleId }),
             });
@@ -478,10 +520,11 @@ export default function AdminAssignPage() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3001/api/admin/role-menus/${selectedRoleForEdit.role_id}`, {
+            const response = await fetch(`${API_URL}/api/admin/role-menus/${selectedRoleForEdit.role_id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "X-API-KEY": API_KEY
                 },
                 body: JSON.stringify({
                     menuIds: selectedMenusForEdit,
@@ -547,10 +590,11 @@ export default function AdminAssignPage() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3001/api/admin/groupid-roles/${selectedGroups.group_id}`, {
+            const response = await fetch(`${API_URL}/api/admin/groupid-roles/${selectedGroups.group_id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "X-API-KEY": API_KEY
                 },
                 body: JSON.stringify({
                     roleIds: selectedRolesForEdit.map(String), // Gửi đúng như backend yêu cầu
@@ -978,8 +1022,12 @@ export default function AdminAssignPage() {
                                 Group
                             </label>
                             <select
+                                
                                 value={selectedGroups}
-                                onChange={(e) => setSelectedGroups(e.target.value)}
+                                onChange={(e) => {
+                                    const selected = Array.from(e.target.selectedOptions, (option) => option.value);
+                                    setSelectedGroups(selected);
+                                }}
                                 style={{
                                     width: "100%",
                                     padding: "10px",

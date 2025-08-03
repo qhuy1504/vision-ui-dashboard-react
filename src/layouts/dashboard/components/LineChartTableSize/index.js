@@ -15,7 +15,14 @@ const LineChartTableSize = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-size`);
+            const res = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/jobs/table-size`,
+                {
+                    headers: {
+                        "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                    },
+                }
+            );
             setData(res.data || []);
         }
         fetchData();

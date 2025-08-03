@@ -21,7 +21,7 @@ export const getUserFromToken = () => {
 export const logoutUser = () => {
     try {
         localStorage.removeItem("token"); // Xóa token khỏi localStorage
-        console.log("Đã đăng xuất: token đã bị xóa");
+        // console.log("Đã đăng xuất: token đã bị xóa");
     } catch (err) {
         console.error("Lỗi khi đăng xuất:", err);
     }
@@ -46,11 +46,11 @@ const publicPathPrefixes = ["/jobs/"]; // Cho phép tất cả path bắt đầu
 export const getFilteredRoutes = () => {
     // Lấy user từ token
     const user = getUserFromToken();
-    console.log("User from token:", user);
+    // console.log("User from token:", user);
 
     // Nếu là admin thì trả tất cả routes
     if (user && user.username === "admin") {
-        console.log("User is admin, returning all routes");
+        // console.log("User is admin, returning all routes");
         return allRoutes;
     }
 

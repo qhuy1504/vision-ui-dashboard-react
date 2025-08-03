@@ -11,10 +11,18 @@ const TopCntRowByDate = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/jobs/table-etl-log`);
+            const res = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/jobs/table-etl-log`,
+                {
+                    headers: {
+                        "X-API-KEY": process.env.REACT_APP_ADMIN_API_KEY,
+                    },
+                }
+            );
             setData(res.data || []);
         })();
     }, []);
+
 
     const uniqueDates = useMemo(
         () => Array.from(new Set(data.map((d) => d.data_date))),
